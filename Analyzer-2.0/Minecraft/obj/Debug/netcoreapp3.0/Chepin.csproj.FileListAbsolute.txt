@@ -1,0 +1,11 @@
+C:\Users\Xiaomi\source\repos\Chepin\Chepin\bin\Debug\netcoreapp3.0\Chepin.exe
+C:\Users\Xiaomi\source\repos\Chepin\Chepin\bin\Debug\netcoreapp3.0\Chepin.deps.json
+C:\Users\Xiaomi\source\repos\Chepin\Chepin\bin\Debug\netcoreapp3.0\Chepin.runtimeconfig.json
+C:\Users\Xiaomi\source\repos\Chepin\Chepin\bin\Debug\netcoreapp3.0\Chepin.runtimeconfig.dev.json
+C:\Users\Xiaomi\source\repos\Chepin\Chepin\bin\Debug\netcoreapp3.0\Chepin.dll
+C:\Users\Xiaomi\source\repos\Chepin\Chepin\bin\Debug\netcoreapp3.0\Chepin.pdb
+C:\Users\Xiaomi\source\repos\Chepin\Chepin\obj\Debug\netcoreapp3.0\Chepin.csprojAssemblyReference.cache
+C:\Users\Xiaomi\source\repos\Chepin\Chepin\obj\Debug\netcoreapp3.0\Chepin.AssemblyInfoInputs.cache
+C:\Users\Xiaomi\source\repos\Chepin\Chepin\obj\Debug\netcoreapp3.0\Chepin.AssemblyInfo.cs
+C:\Users\Xiaomi\source\repos\Chepin\Chepin\obj\Debug\netcoreapp3.0\Chepin.dll
+C:\Users\Xiaomi\source\repos\Chepin\Chepin\obj\Debug\netcoreapp3.0\Chepin.pdb
