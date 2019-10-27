@@ -18,28 +18,28 @@ namespace Minecraft
                                               "double", "public", "static", "void", "main", "String",
                                               "args", "Random", "Color", "Font", "File", "Timer" };
 
-        static public string[] _operators = { "for", "if", "switch", "case", "do", "while", "break",
+        static public string[] Operators = { "for", "if", "switch", "case", "do", "while", "break",
                                               "continue", "goto", "new", "random", "print", "println",
                                               "==", "||", "&&", "&", "|", "<", ">", "!=", "++", "--",
                                               "*", "/", "%", "!", "=", "+", "-", "{", "(", ".", ";",
                                               ":", "[", ",", "else", "toString", "??", "try", "catch",
                                               "finaly", "abs", "default"};
 
-        static private int Count(string _str, string _sym)
+        static private int FindAmountSymbols(string str, string sym)
         {
-            if (_sym.Length > _str.Length)
+            if (sym.Length > str.Length)
                 return 0;
 
-            int _counter = 0;
+            int counter = 0;
 
-            for (int i = 0; i < _str.Length - _sym.Length; i++)
-                if (_str.Substring(i, _sym.Length) == _sym)
-                    _counter++;
+            for (var i = 0; i < str.Length - sym.Length; i++)
+                if (str.Substring(i, sym.Length) == sym)
+                    counter++;
 
-            return _counter;
+            return counter;
         }
 
-        static private List<string> Vlogit(string code)
+        static private List<string> GetFunctions(string code)
         {
             List<string> arrayFunc = new List<string>();
 
@@ -92,16 +92,30 @@ namespace Minecraft
             for (int i = 0; i < arrayFunc.Count; i++)
                 arrayFunc[i] = Refactoring(arrayFunc[i]);
 
-            return arrayFunc;
+            var functions = FunctionCounter.FindFunctions(arrayFunc);
+            var usedFunctions = new List<string>();
+
+            foreach (var item in functions.Keys)
+            {
+                for (var i = 0; i < arrayFunc.Count; i++)
+                    if (FindMethodName(arrayFunc[i]) == item)
+                        for (int j = 0; j < functions[item]; j++)
+                            if (j == 0)
+                                usedFunctions.Add(arrayFunc[i]);
+                            else
+                                usedFunctions[usedFunctions.Count - 1] += FindCode(arrayFunc[i]);
+            }
+
+            return usedFunctions;
         }
 
-        static private string Refactoring(string _str)
+        static private string Refactoring(string code)
         {
-            _str = _str.Replace("\r", " ");
-            _str = _str.Replace("\n", " ");
-            _str = _str.Replace("\t", " ");
+            code = code.Replace("\r", " ");
+            code = code.Replace("\n", " ");
+            code = code.Replace("\t", " ");
 
-            return _str;
+            return code;
         }
 
         static public string FindMethodName(string code)
@@ -116,16 +130,16 @@ namespace Minecraft
             return (name.Trim() + ")");
         }
 
-        static private string FindCode(string code)
+        static public string FindCode(string code)
         {
             return Refactoring(code.Substring(code.IndexOf(')') + 1));
         }
 
-        static public List<string> FindMethodNames(string _filePath)
+        static public List<string> FindMethodNames(string filePath)
         {
             var names = new List<string>();
 
-            var code = Vlogit(System.IO.File.ReadAllText(_filePath));
+            var code = GetFunctions(System.IO.File.ReadAllText(filePath));
 
             foreach (var item in code)
                 names.Add(FindMethodName(item));
@@ -133,36 +147,31 @@ namespace Minecraft
             return names;
         }
 
-        static public List<Dictionary<string, int>> analyze(string _filePath)
+        static public List<Dictionary<string, int>> analyze(string filePath)
         {
-            // Change to FindFunctions
-            var code = Vlogit(System.IO.File.ReadAllText(_filePath));
-            var tempCode = FunctionCounter.FindFunctions(code);
-            return null;
-            // .
+            var code = GetFunctions(System.IO.File.ReadAllText(filePath));
 
-            var _listDictionary = new List<Dictionary<string, int>>();
-
+            var listDictionary = new List<Dictionary<string, int>>();
 
             foreach (var itemG in code)
             {
-                string __code = FindCode(itemG);
+                string tempCode = FindCode(itemG);
 
-                var _dictionary = new Dictionary<string, int>();
+                var dictionary = new Dictionary<string, int>();
 
-                _dictionary.Clear();
+                dictionary.Clear();
 
-                _dictionary.Add(FindMethodName(itemG), -1);
+                dictionary.Add(FindMethodName(itemG), -1);
 
                 //
                 // find all _symbols and replace them on space
                 //
 
-                foreach (var item in _symbols)
-                    if (Count(__code, item) != 0)
+                foreach (var symbol in _symbols)
+                    if (FindAmountSymbols(tempCode, symbol) != 0)
                     {
-                        _dictionary.Add(item, Count(__code, item));
-                        __code = __code.Replace(item, " ");
+                        dictionary.Add(symbol, FindAmountSymbols(tempCode, symbol));
+                        tempCode = tempCode.Replace(symbol, " ");
                     }
 
                 //
@@ -172,131 +181,105 @@ namespace Minecraft
                 int flag = 0, tmp = 0;
                 string word;
 
-                for (int i = 0; i < __code.Length; i++)
-                    if (__code[i] == '"' || __code[i] == '\'')
+                for (int i = 0; i < tempCode.Length; i++)
+                    if (tempCode[i] == '"' || tempCode[i] == '\'')
                     {
                         flag++;
                         if (flag == 2)
                         {
-                            word = __code.Substring(tmp, i - tmp + 1);
-                            if (!_dictionary.ContainsKey(word))
-                                _dictionary.Add(word, 1);
+                            word = tempCode.Substring(tmp, i - tmp + 1);
+                            if (!dictionary.ContainsKey(word))
+                                dictionary.Add(word, 1);
                             else
-                                _dictionary[word]++;
-                            __code = __code.Remove(tmp, i - tmp + 1);
+                                dictionary[word]++;
+                            tempCode = tempCode.Remove(tmp, i - tmp + 1);
                             flag = 0;
                         }
                         tmp = i;
                     }
 
-                // 
-                // Create List with last words
-                //
+                // Create List with last words.
 
-                __code = __code.Replace("}", " ");
-                __code = __code.Replace("]", " ");
-                __code = __code.Replace(")", " ");
+                tempCode = tempCode.Replace("}", " ");
+                tempCode = tempCode.Replace("]", " ");
+                tempCode = tempCode.Replace(")", " ");
 
-                var _otherWords = new List<string>();
+                var lastWords = new List<string>();
 
-                foreach (var item in __code.Split(' '))
+                foreach (var item in tempCode.Split(' '))
                     if (item != "")
-                        _otherWords.Add(item);
+                        lastWords.Add(item);
 
-                //
-                // add "()" to functions and remove from global ()
-                //
+                // Add "()" to functions and remove from global ().
+                
+                for (int i = 0; i < lastWords.Count; i++)
+                    if (_functions.Contains(lastWords[i]))
+                        dictionary["("]--;
 
-                for (int i = 0; i < _otherWords.Count; i++)
-                    if (_functions.Contains(_otherWords[i]))
-                        _dictionary["("]--;
+                //  Add last world to dictionary.
 
-                //
-                //  ADD last world to dictionary
-                //
-
-                foreach (var item in _otherWords)
-                    if (!_dictionary.ContainsKey(item))
-                        _dictionary.Add(item, 1);
+                foreach (var item in lastWords)
+                    if (!dictionary.ContainsKey(item))
+                        dictionary.Add(item, 1);
                     else
-                        _dictionary[item]++;
+                        dictionary[item]++;
 
-                //
-                //  do while
-                //
+                //  do while.
 
-                if (_dictionary.ContainsKey("while") && _dictionary.ContainsKey("do"))
-                    _dictionary["while"] -= _dictionary["do"];
+                if (dictionary.ContainsKey("while") && dictionary.ContainsKey("do"))
+                    dictionary["while"] -= dictionary["do"];
 
-                if (_dictionary.ContainsKey("while"))
-                    _dictionary["("] -= _dictionary["while"];
+                if (dictionary.ContainsKey("while"))
+                    dictionary["("] -= dictionary["while"];
 
-                if (_dictionary.ContainsKey("do"))
-                    _dictionary["("] -= _dictionary["do"];
+                if (dictionary.ContainsKey("do"))
+                    dictionary["("] -= dictionary["do"];
 
-                //
-                // if else
-                //
+                // if else.
 
-                if (_dictionary.ContainsKey("if") && _dictionary.ContainsKey("else"))
-                    _dictionary["if"] -= _dictionary["else"];
+                if (dictionary.ContainsKey("if") && dictionary.ContainsKey("else"))
+                    dictionary["if"] -= dictionary["else"];
 
-                //
-                // try catch finaly
-                //
+                // try catch finaly.
 
-                if (_dictionary.ContainsKey("try") && _dictionary.ContainsKey("catch"))
-                    _dictionary["try"] -= _dictionary["catch"];
+                if (dictionary.ContainsKey("try") && dictionary.ContainsKey("catch"))
+                    dictionary["try"] -= dictionary["catch"];
 
-                if (_dictionary.ContainsKey("try") && _dictionary.ContainsKey("finaly"))
-                    _dictionary["try"] -= _dictionary["finaly"];
+                if (dictionary.ContainsKey("try") && dictionary.ContainsKey("finaly"))
+                    dictionary["try"] -= dictionary["finaly"];
 
-                //
-                //  Ban words from _banWords and remove all keys with value 0
-                //
+                //  Ban words from _banWords and remove all keys with value 0.
 
                 foreach (var item in _banWords)
-                    if (_dictionary.ContainsKey(item))
-                        _dictionary.Remove(item);
+                    if (dictionary.ContainsKey(item))
+                        dictionary.Remove(item);
 
-                if (_dictionary.ContainsKey("("))
-                    if (_dictionary["("] == 0)
-                        _dictionary.Remove("(");
+                foreach (var item in Operators)
+                    if (dictionary.ContainsKey(item))
+                        if (dictionary[item] == 0)
+                            dictionary.Remove(item);
 
-                if (_dictionary.ContainsKey("while"))
-                    if (_dictionary["while"] == 0)
-                        _dictionary.Remove("while");
 
-                if (_dictionary.ContainsKey("if"))
-                    if (_dictionary["if"] == 0)
-                        _dictionary.Remove("if");
-
-                if (_dictionary.ContainsKey("try"))
-                    if (_dictionary["try"] == 0)
-                        _dictionary.Remove("try");
-
-                _listDictionary.Add(_dictionary);
+                listDictionary.Add(dictionary);
             }
 
-            //
-            // Make Global Dictionary with all Functions
-            //
+            // Make Global Dictionary with all Functions.
 
-            var _globaldick = new Dictionary<string, int>();
-            _globaldick.Add("GLOBAL", 0);
-            foreach (var dictionary in _listDictionary)
+            var global = new Dictionary<string, int>();
+            global.Add("GLOBAL", 0);
+            foreach (var dictionary in listDictionary)
                 foreach (var key in dictionary.Keys)
-                    if (!_globaldick.ContainsKey(key))
-                        _globaldick.Add(key, dictionary[key]);
+                    if (!global.ContainsKey(key))
+                        global.Add(key, dictionary[key]);
                     else
-                        _globaldick[key] += dictionary[key];
+                        global[key] += dictionary[key];
 
-            foreach (var methodName in FindMethodNames(_filePath))
-                _globaldick.Remove(methodName);
+            foreach (var methodName in FindMethodNames(filePath))
+                global.Remove(methodName);
 
-            _listDictionary.Add(_globaldick);
+            listDictionary.Add(global);
 
-            return _listDictionary;
+            return listDictionary;
         }
     }
 }
