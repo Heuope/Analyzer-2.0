@@ -305,10 +305,10 @@ namespace Minecraft
                     M.Add(variable);
                     continue;
                 }
-                if (introduced & appropriation)
+                if (introduced) // & appropriation
                 {
                     P.Add(variable);
-                    continue;
+                    //continue;
                 }
                 T.Add(variable);
             }
@@ -379,10 +379,10 @@ namespace Minecraft
                     M.Add(variable);
                     continue;
                 }
-                if (introduced & appropriation)
+                if (introduced) // & appropriation
                 {
                     P.Add(variable);
-                    continue;
+                    //continue;
                 }
                 if (introduced)
                     T.Add(variable);
