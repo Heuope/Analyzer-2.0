@@ -30,6 +30,10 @@ namespace Minecraft
 
         static public Dictionary<string, int> FindFunctions(List<string> code)
         {
+            _functions.Clear();
+            _functionNames.Clear();
+            _usedFunctions.Clear();
+
             foreach (var item in code)
             {
                 string temp = Analyze.FindMethodName(item);

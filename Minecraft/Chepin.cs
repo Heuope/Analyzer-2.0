@@ -1,32 +1,41 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Chepin
+namespace Minecraft
 {
-    class Chepin
+    class Box
     {
-        static public List<char> _numbers = new List<char> { '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '"', '\'' };
+        public Dictionary<string, Dictionary<string, int>> FirstMetric = new Dictionary<string, Dictionary<string, int>>();
 
-        static public string[] _allSigns = { "(", "<=", ">=", "==", "!=", "+=", "-=", "++", "--", "+", "-", "<", ">", "=", "*", "/", "%" };
+        public Dictionary<string, Dictionary<string, Dictionary<string, int>>> SecondMetric =
+            new Dictionary<string, Dictionary<string, Dictionary<string, int>>>();
 
-        static public string[] _limitedList = { "+", "-", "!", "<", ">" };
+        public Dictionary<string, Dictionary<string, Dictionary<string, int>>> ThirdMetric =
+            new Dictionary<string, Dictionary<string, Dictionary<string, int>>>();
+    }
 
-        static public string[] _arifmeticOperation = { "+", "-", "*", "/", "=", "++", "--" };
+    static class Chepin
+    {
+        static private List<char> _numbers = new List<char> { '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '"', '\'' };
 
-        static public string[] _comparisonSigns = { "<", ">", "<=", ">=", "==", "!=" };
+        static private string[] _allSigns = { "(", "<=", ">=", "==", "!=", "+=", "-=", "++", "--", "+", "-", "<", ">", "=", "*", "/", "%" };
 
-        static public string[] _assignmentSigns = { "=", "++", "--", "+=", "-=" };
+        static private string[] _limitedList = { "+", "-", "!", "<", ">" };
 
-        static public string[] _assignmentSignsBack = { "++", "--" };
+        static private string[] _arifmeticOperation = { "+", "-", "*", "/", "=", "++", "--" };
 
-        static public string[] _symbols = { "==", "||", "&&", "&", "|", "<", ">", "!=", "++", "--",
+        static private string[] _comparisonSigns = { "<", ">", "<=", ">=", "==", "!=" };
+
+        static private string[] _assignmentSigns = { "=", "++", "--", "+=", "-=" };
+
+        static private string[] _assignmentSignsBack = { "++", "--" };
+
+        static private string[] _symbols = { "==", "||", "&&", "&", "|", "<", ">", "!=", "++", "--",
                                             "*", "/", "%", "!", "=", "+", "-", "{", "(", ";",
                                             ":", "[", ",", "??", "}", ")", "]" };
 
-        static public string[] _functions = { "random", "println", "print", "toString", "abs" };
+        static private string[] _functions = { "random", "println", "print", "toString", "abs" };
 
         static private string[] _banWords = { "nextInt", "Math", "System", "out", "IO", "int", "float",
                                               "double", "public", "static", "void", "main", "String",
@@ -58,7 +67,9 @@ namespace Chepin
 
             return _str;
         }
-        static private List<string> GetFunctionContents(string code) // Возврощает внутренности функции 
+
+        // Возврощает внутренности функции 
+        static private List<string> GetFunctionContents(string code)
         {
             List<string> arrayFunc = new List<string>();
             string[] headingWords = { "public", "static", "void", "private", "protected" };
@@ -68,16 +79,16 @@ namespace Chepin
             int braceCount = 0;
             for (int i = 0; i < code.Length; i++)
             {
-                if (!ignoredSigns.Contains(code[i])) 
+                if (!ignoredSigns.Contains(code[i]))
                     currentWord += code[i];
                 else if (currentWord != "")
                 {
-                    if (headingWords.Contains(currentWord)) 
+                    if (headingWords.Contains(currentWord))
                     {
                         while (code[i] != '{')
                             functionCode += code[i++];
                         functionCode += code[i];
-                        if (functionCode.IndexOf("class") != -1) 
+                        if (functionCode.IndexOf("class") != -1)
                         {
                             functionCode = "";
                             currentWord = "";
@@ -101,14 +112,16 @@ namespace Chepin
                 }
             }
             return arrayFunc;
-        } 
+        }
 
-        static string RemoveComponents(string code, string[] deletedWords) // Удаляет из строки все лишнее
+        // Удаляет из строки все лишнее
+        static string RemoveComponents(string code, string[] deletedWords)
         {
             foreach (var word in deletedWords)
                 code = code.Replace(word, " ");
             return code;
-        } 
+        }
+
         static string RemoveString(string code, char startOfRemoval, char endOfRemoval) // Удаляет Строки
         {
             int flag = 0, temp = 0;
@@ -124,7 +137,8 @@ namespace Chepin
                     temp = i;
                 }
             return code;
-        } 
+        }
+
         static private List<string> GetVariables(string functionContent) // Возврощает список переменых
         {
             List<string> functionArray = new List<string>();
@@ -145,7 +159,8 @@ namespace Chepin
                     variables.Add(item);
 
             return variables;
-        }  
+        }
+
         static private string PreparationToPreparationToSplit(string functionContent, string symbol)
         {
             string functionSplitingContent = "";
@@ -185,6 +200,7 @@ namespace Chepin
             }
             return functionSplitingContent;
         }
+
         static private string PreparationToSplit(string functionContent)
         {
             foreach (var sign in _allSigns)
@@ -192,6 +208,7 @@ namespace Chepin
             return functionContent;
 
         }
+
         static private List<string> GetCodeForAnalysis(string functionContent) // Формируется список для ИИ
         {
             List<string> functionArray = new List<string>();
@@ -214,6 +231,7 @@ namespace Chepin
             return variables;
 
         }
+
         static private List<string> GetMethodName(List<string> arrayFunctions)
         {
             List<string> methodNames = new List<string>();
@@ -227,6 +245,7 @@ namespace Chepin
             return methodNames;
 
         }
+
         private static Dictionary<string, List<string>> GetVariablesGroup(IEnumerable<string> variableSet, List<string> analisisCode) // ИИ, там все сложно
         {
             List<string> P = new List<string>();
@@ -299,7 +318,7 @@ namespace Chepin
             functionGroups.Add("T", T);
 
             return functionGroups;
-        } 
+        }
 
         private static Dictionary<string, List<string>> GetVariablesGroupIO(IEnumerable<string> variableSet, List<string> analisisCode) // ИИ, там все сложно
         {
@@ -374,75 +393,126 @@ namespace Chepin
             functionGroups.Add("T", T);
 
             return functionGroups;
-        } 
-        static void Main()
+        }
+
+        private static int GetCount(List<string> list, string value)
+        {
+            int count = 0;            
+            foreach (var item in list)
+                if (item == value)
+                    count++;                            
+
+            return count;
+        }
+
+        static public Box NotMain(string filePath)
         {
             List<string> functions;
             List<string> analisisCode;
             List<string> methodNames;
-            string filePath = "D:\\Progi\\metraLab3\\Analyzer-2.0\\code.txt"; // Открываем файл
+
+            var box = new Box();            
+
             string fileCode = System.IO.File.ReadAllText(filePath);
 
             fileCode = Refactoring(fileCode);
             fileCode = RemoveString(fileCode, '"', '\'');
-           
+
+            var _functions = Analyze.GetFunctions(fileCode);
+
+            var _functionNames = new List<string>();
+
+            foreach (var item in _functions)
+                _functionNames.Add(Analyze.FindMethodName(item));
+
+            var _uselesNames = new List<string>();
 
             methodNames = GetMethodName(GetFunctionContents(fileCode));
+
+            foreach (var name in methodNames)
+                if (!_functionNames.Contains(name + "()"))
+                    _uselesNames.Add(name);
 
             foreach (var item in GetMethodName(GetFunctionContents(fileCode)))  // Подготавливаем код проги
                 fileCode = fileCode.Replace(item + "(", " ");
 
             functions = GetFunctionContents(fileCode); // Список функций
-            Console.WriteLine("Кол-во переменных");
-
-            foreach (var functionNumber in functions)
+            
+            foreach (var functionCode in functions)
             {
-                var variableSet = GetVariables(functionNumber).Distinct(); // Список уникальных переменных
+                var tempDict = new Dictionary<string, int>();
 
-                
-                Console.WriteLine(methodNames[functions.IndexOf(functionNumber)] + ": ");
+                var alilya = new Dictionary<string, int>();
 
-                int temp;
-                foreach (var variablesNumber in variableSet)  // Кол-во вхождений переменной
-                {
-                    temp = 0;
-                    foreach (var item in GetVariables(functionNumber))
-                        if (item == variablesNumber)
-                            temp++;
-                    Console.WriteLine(temp + ": " + variablesNumber);
-                }
+                var variableSet = GetVariables(functionCode); // Список уникальных переменных
+
+                foreach (var item in variableSet)
+                    if (!alilya.ContainsKey(item))
+                        alilya.Add(item, GetCount(variableSet, item) * GetCount(methodNames, methodNames[functions.IndexOf(functionCode)]) - GetCount(methodNames, methodNames[functions.IndexOf(functionCode)]));
+
+                box.FirstMetric.Add(methodNames[functions.IndexOf(functionCode)], alilya);                                
             }
 
             fileCode = RemoveString(fileCode, '[', ']');
-            functions = GetFunctionContents(fileCode);
-            Console.WriteLine("Полные метрики");
-            foreach (var functionNumber in functions)
+            functions = GetFunctionContents(fileCode);                     
+
+            foreach (var functionCode in functions)
             {
-                analisisCode = GetCodeForAnalysis(functionNumber); // Список для ИИ
+                analisisCode = GetCodeForAnalysis(functionCode); // Список для ИИ
+                var variableSet = GetVariables(functionCode).Distinct();
+                string functionName = methodNames[functions.IndexOf(functionCode)];
+                var tempVariableGroup = GetVariablesGroup(variableSet, analisisCode);
 
-                var variableSet = GetVariables(functionNumber).Distinct();
+                var secondDick = new Dictionary<string, Dictionary<string, int>>();
 
-                Console.WriteLine(methodNames[functions.IndexOf(functionNumber)] + ":______________ ");
+                foreach (var item in tempVariableGroup.Keys) // Получает Словарь переменных и в нем перебирает значения
+                {                        
+                    var firstDick = new Dictionary<string, int>();
 
-                foreach (var item in GetVariablesGroup(variableSet, analisisCode)) // Получает Словарь переменных и в нем перебирает значения
-                    foreach (var elem in item.Value)
-                        Console.WriteLine(item.Key + ": " + elem);
+                    var variables = tempVariableGroup[item];
 
+                    foreach (var vari in variables)
+                        firstDick.Add(vari, GetCount(variables, vari) * GetCount(methodNames, functionName) - GetCount(methodNames, functionName));
+
+                    secondDick.Add(item, firstDick);                    
+                }
+
+                box.SecondMetric.Add(functionName, secondDick);
             }
-            Console.WriteLine("Метрики ввода-вывода");
-            foreach (var functionNumber in functions)
+                       
+            foreach (var functionCode in functions)
             {
-                analisisCode = GetCodeForAnalysis(functionNumber);
+                analisisCode = GetCodeForAnalysis(functionCode);
+                var variableSet = GetVariables(functionCode).Distinct();
+                string functionName = methodNames[functions.IndexOf(functionCode)];
+                var tempVariableGroup = GetVariablesGroupIO(variableSet, analisisCode);
 
-                var variableSet = GetVariables(functionNumber).Distinct();
+                var secondDick = new Dictionary<string, Dictionary<string, int>>();
 
-                Console.WriteLine(methodNames[functions.IndexOf(functionNumber)] + ":______________ ");
+                foreach (var item in tempVariableGroup.Keys) // Получает Словарь переменных и в нем перебирает значения
+                {
+                    var firstDick = new Dictionary<string, int>();
 
-                foreach (var item in GetVariablesGroupIO(variableSet, analisisCode))
-                    foreach (var elem in item.Value)
-                        Console.WriteLine(item.Key + ": " + elem);
+                    var variables = tempVariableGroup[item];
 
+                    foreach (var vari in variables)
+                        firstDick.Add(vari, GetCount(variables, vari) * GetCount(methodNames, functionName) - GetCount(methodNames, functionName));
+
+                    secondDick.Add(item, firstDick);
+                }
+
+                box.ThirdMetric.Add(functionName, secondDick);
             }
+
+
+            foreach (var name in _uselesNames)
+            {
+                box.FirstMetric.Remove(name);
+                box.SecondMetric.Remove(name);
+                box.ThirdMetric.Remove(name);
+            }
+                                   
+            return box;
         }
     }
 }

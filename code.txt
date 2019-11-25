@@ -1,17 +1,23 @@
-package javacode;
-
-public class CodeJava {
-	
-
-	public static int IasnHuita()
-	{
-		return 0;
-	}
-
+{
 	public static void Some()
 	{
 		System.out.print("Hello");		
 	}
+	
+	
+
+
+public static void main(String[] args) 
+	{
+   		CalculateSomething();
+		TetstPolygone2();
+		Google1();
+		e();
+		Some();
+		GAGAGA();
+
+		}
+
 
 	public static void Other()
 	{
@@ -21,6 +27,7 @@ public class CodeJava {
 	public static void e()
 	{
 		Other();
+		int banan = System.in.nextInt();
 		int[] array = {10, 2, 10, 3, 1, 2, 5};
 		System.out.println(Arrays.toString(array));
 		for (int left = 0; left < array.length; left++) 
@@ -41,35 +48,126 @@ public class CodeJava {
 	Some();
 	}
 		System.out.println(Arrays.toString(array));
+		System.out.println(banan);
 	}
+
+
+	public static void Google1()
+	{
+
+	if (x < 0)
+	{
 	
-	 public static void main(String[] args) {
-		e();   
-		 int arr[] = new int[10];
-		 for(int i = 0; i < arr.length; i++) {
-		     
-		     arr[i] = (int)(Math.random() * 100);
-		     System.out.print(arr[i] + "  ");
-		 }
-			 for (int i = 0; i < arr.length; i++) {
-			        int min = arr[i];
-			        int min_i = i; 
-			 for (int j = i + 1; j < arr.length; j++) {
-			         if (arr[j] < min) {
-			             min = arr[j];
-			             min_i = j;
-			            }
-			        }
-		       if (i != min_i) {
-		            int tmp = arr[i];
-		            arr[i] = arr[min_i];
-		            arr[min_i] = tmp;
-		        }
-		     }
-			 System.out.print("\n");
-			 for(int i = 0; i <  arr.length; i++) {
-			 	System.out.print(arr[i] + "  ");
+	}
+	else
+	{
+		if (x == 0)
+		{
+		}
+		else
+		{ 
+			if (x < 0.5)
+			{ 
+			}
+			else
+			{
+				if (x < 1)
+				 {
+				 }
+				 else
+				 {
+				 }
 			 }
-			 
 		 }
- }
+	}
+	}
+
+	public static void TetstPolygone2()
+	{
+		switch (x)
+		{
+			case x < 0:
+			break;
+
+			case x == 0:
+			break;
+
+			case x < 0.5:
+			break;
+
+			case x < 1:
+			break;
+
+			deafault
+			break;
+
+		}
+	}
+
+	
+	 public static void GAGAGA()
+	{
+		int x = System.in.nextInt();
+		int[100][100][100] array;
+	
+		
+		for (int i = 0; i < array.length; i++)
+		{
+			for (int j = 0; j < array[0].length; j++)
+			{
+				for (int k = 0; k < array[0][0].length; k++)
+				{
+					do
+					{
+						array[i][j][k] *= i;
+						array[i][j][k] */ j;
+						array[i][j][k] = k - array[i][j][k];
+					} while (array[i][j][k] > 42 && array[i][j][k] < 1337)
+				}
+			}
+		}
+
+		for (int l = 0; l < 100; l++)
+{
+		if (x < 1)
+		{
+			for (int i = 0; i < array.length;i++)
+			{
+				for (int j = 0; j < array[0].length)
+				{
+					for (int k = 0; k < array[0][0].length; k++)
+					{
+						while (array[i][j][k] > 0)
+						{
+							switch (array[i][j][k])
+							{
+								case array[i][j][k] < 20:
+									int fact = 1;
+									
+									array[i][j][k]--;
+									System.out.println(fact);																		
+								break;
+								
+								
+								
+								
+								default:
+									System.out.println(array[i][j][k]);
+									array[i][j][k]--;
+								break;
+							}
+
+						}
+
+					}
+				}
+}
+}
+}
+			}
+		}
+}
+	}
+
+
+}

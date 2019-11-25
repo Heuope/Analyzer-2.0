@@ -39,7 +39,7 @@ namespace Minecraft
             return counter;
         }
 
-        static private List<string> GetFunctions(string code)
+        static public List<string> GetFunctions(string code)
         {
             List<string> arrayFunc = new List<string>();
 
@@ -105,7 +105,7 @@ namespace Minecraft
                             else
                                 usedFunctions[usedFunctions.Count - 1] += FindCode(arrayFunc[i]);
             }
-
+            MainWindow.codeList = usedFunctions;
             return usedFunctions;
         }
 
@@ -149,7 +149,7 @@ namespace Minecraft
 
         static public List<Dictionary<string, int>> analyze(string filePath)
         {
-            var code = GetFunctions(System.IO.File.ReadAllText(filePath));
+            var code = GetFunctions(System.IO.File.ReadAllText(filePath));            
 
             var listDictionary = new List<Dictionary<string, int>>();
 
@@ -273,9 +273,7 @@ namespace Minecraft
                         global.Add(key, dictionary[key]);
                     else
                         global[key] += dictionary[key];
-
-            foreach (var methodName in FindMethodNames(filePath))
-                global.Remove(methodName);
+         
 
             listDictionary.Add(global);
 

@@ -7,9 +7,152 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <Menu>
-            <MenuItem Header="Load" Click="Load"/>
-            <MenuItem Header="Save" Click="Save"/>
+        <Grid.RowDefinitions>
+            <RowDefinition MaxHeight="20" MinHeight="20"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Menu Grid.Row="0">
+            <MenuItem Header="Load"
+                      Click="Load" />
         </Menu>
+        <TabControl Grid.Row="1">
+            <TabItem Header="Chepin Spen">
+                <Grid x:Name="Sosiska">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition MaxWidth="150"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <DataGrid x:Name="ChepinSpen" Loaded="ChepinSpen_Loaded" IsEnabled="False" Grid.Column="1"/>
+                    <ComboBox x:Name="ComboBoxChepinSpen" MaxHeight="25" VerticalAlignment="Top" 
+                              SelectionChanged="ComboBoxChepinSpen_Selected"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Chepin metrics">
+                <Grid x:Name="Kolbaska">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition MaxHeight="60"/>
+                        <RowDefinition MaxHeight="40"/>
+                        <RowDefinition MinHeight="150"/>
+                        <RowDefinition MinHeight="100"/>
+                        <RowDefinition MinHeight="50"/>
+                    </Grid.RowDefinitions>
+                    
+                    <ComboBox x:Name="ComboBoxChepinIO" MaxHeight="25" VerticalAlignment="Top" 
+                              SelectionChanged="ComboBoxChepinIO_SelectionChanged"/>
+
+                    <TextBlock Text="Full metric Chepina" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="4" FontSize="30" HorizontalAlignment="Center"/>
+                    <TextBlock Text="I/O metric Chepina" Grid.Row="0" Grid.Column="5" Grid.ColumnSpan="4" FontSize="30" HorizontalAlignment="Center"/>
+                    <TextBlock Text="Variable group" Grid.Row="1" TextWrapping="Wrap" FontSize="15"/>
+                    <TextBlock Text="Variables of group" Grid.Row="2" TextWrapping="Wrap" FontSize="15"/>
+                    <TextBlock Text="Amount of variables" Grid.Row="3" TextWrapping="Wrap" FontSize="15"/>
+                    <TextBlock Text="Chepin Metric" Grid.Row="4" TextWrapping="Wrap" FontSize="15"/>
+                    <TextBlock Text="P" Grid.Row="1" Grid.Column="1" FontSize="20" HorizontalAlignment="Center" />
+                    <TextBlock Text="M" Grid.Row="1" Grid.Column="2" FontSize="20" HorizontalAlignment="Center" />
+                    <TextBlock Text="C" Grid.Row="1" Grid.Column="3" FontSize="20" HorizontalAlignment="Center" />
+                    <TextBlock Text="T" Grid.Row="1" Grid.Column="4" FontSize="20" HorizontalAlignment="Center" />
+                    <TextBlock Text="P" Grid.Row="1" Grid.Column="5" FontSize="20" HorizontalAlignment="Center" />
+                    <TextBlock Text="M" Grid.Row="1" Grid.Column="6" FontSize="20" HorizontalAlignment="Center" />
+                    <TextBlock Text="C" Grid.Row="1" Grid.Column="7" FontSize="20" HorizontalAlignment="Center" />
+                    <TextBlock Text="T" Grid.Row="1" Grid.Column="8" FontSize="20" HorizontalAlignment="Center" />
+                    <TextBlock x:Name="_1"
+                               Grid.Column="1"
+                               Grid.Row="2"
+                               FontSize="20"
+                               HorizontalAlignment="Center"/>
+                    <TextBlock x:Name="_2"
+                               Grid.Column="2"
+                               Grid.Row="2"
+                               HorizontalAlignment="Center"
+                               FontSize="20" />
+                    <TextBlock x:Name="_3"
+                               Grid.Column="3"
+                               Grid.Row="2"
+                               HorizontalAlignment="Center"
+                               FontSize="20" />
+                    <TextBlock x:Name="_4"
+                               Grid.Column="4"
+                               Grid.Row="2"
+                               HorizontalAlignment="Center"
+                               FontSize="20" />
+                    <TextBlock x:Name="_5"
+                               Grid.Column="5"
+                               Grid.Row="2"
+                               HorizontalAlignment="Center"
+                               FontSize="20" />
+                    <TextBlock x:Name="_6"
+                               Grid.Column="6"
+                               Grid.Row="2"
+                               HorizontalAlignment="Center"
+                               FontSize="20" />
+                    <TextBlock x:Name="_7"
+                               Grid.Column="7"
+                               Grid.Row="2"
+                               HorizontalAlignment="Center"
+                               FontSize="20" />
+                    <TextBlock x:Name="_8"
+                               Grid.Column="8"
+                               Grid.Row="2"
+                               HorizontalAlignment="Center"
+                               FontSize="20" />
+                    <TextBlock x:Name="_9"
+                               Grid.Column="1"
+                               Grid.Row="3"
+                               HorizontalAlignment="Center"
+                               FontSize="20" />
+                    <TextBlock x:Name="_10"
+                               FontSize="20"
+                               Grid.Column="2" Grid.Row="3" HorizontalAlignment="Center"/>
+                    <TextBlock x:Name="_11"
+                               FontSize="20"
+                               Grid.Column="3" Grid.Row="3" HorizontalAlignment="Center"/>
+                    <TextBlock x:Name="_12"
+                               FontSize="20"
+                               Grid.Column="4" Grid.Row="3" HorizontalAlignment="Center"/>
+                    <TextBlock x:Name="_13"
+                               FontSize="20"
+                               Grid.Column="5" Grid.Row="3" HorizontalAlignment="Center"/>
+                    <TextBlock x:Name="_14"
+                               FontSize="20"
+                               Grid.Column="6" Grid.Row="3" HorizontalAlignment="Center"/>
+                    
+                    <TextBlock x:Name="_15"
+                               FontSize="20"
+                               Grid.Column="7" Grid.Row="3" HorizontalAlignment="Center"/>
+                    
+                    <TextBlock x:Name="_16"
+                               FontSize="20"
+                               Grid.Column="8" Grid.Row="3" HorizontalAlignment="Center"/>
+                    
+                    <TextBlock x:Name="_17"
+                               Grid.Column="1"
+                               Grid.Row="4"
+                               TextWrapping="Wrap"
+                               Grid.ColumnSpan="4"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               FontSize="30"/>
+                    
+                    <TextBlock x:Name="_18"
+                               Grid.Column="5"
+                               Grid.Row="4"
+                               TextWrapping="Wrap"
+                               Grid.ColumnSpan="4"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Center"
+                               FontSize="30"/>
+                </Grid>
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>
