@@ -30,7 +30,7 @@
             <TabItem Header="Chepin metrics">
                 <Grid x:Name="Kolbaska">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
+                        <ColumnDefinition />
                         <ColumnDefinition/>
                         <ColumnDefinition/>
                         <ColumnDefinition/>
@@ -50,107 +50,237 @@
                     
                     <ComboBox x:Name="ComboBoxChepinIO" MaxHeight="25" VerticalAlignment="Top" 
                               SelectionChanged="ComboBoxChepinIO_SelectionChanged"/>
+                    
+                    <StackPanel Grid.Row="0"
+                            Grid.Column="1"
+                            Grid.ColumnSpan="4"
+                            Background="LightGreen">
+                        <TextBlock Text="Full metric Chepina"
+                                   Margin="40 0 0 0"
+                                   FontSize="30"
+                                   HorizontalAlignment="Center" />
+                    </StackPanel>
+                    <StackPanel
+                        Grid.Row="0"
+                        Grid.Column="5"
+                        Grid.ColumnSpan="4"
+                        Background="LightBlue">
+                        <TextBlock Text="I/O metric Chepina" FontSize="30" HorizontalAlignment="Center"
+                                   Margin="40 0 0 0"/>
+                    </StackPanel>
 
-                    <TextBlock Text="Full metric Chepina" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="4" FontSize="30" HorizontalAlignment="Center"/>
-                    <TextBlock Text="I/O metric Chepina" Grid.Row="0" Grid.Column="5" Grid.ColumnSpan="4" FontSize="30" HorizontalAlignment="Center"/>
-                    <TextBlock Text="Variable group" Grid.Row="1" TextWrapping="Wrap" FontSize="15"/>
-                    <TextBlock Text="Variables of group" Grid.Row="2" TextWrapping="Wrap" FontSize="15"/>
-                    <TextBlock Text="Amount of variables" Grid.Row="3" TextWrapping="Wrap" FontSize="15"/>
-                    <TextBlock Text="Chepin Metric" Grid.Row="4" TextWrapping="Wrap" FontSize="15"/>
-                    <TextBlock Text="P" Grid.Row="1" Grid.Column="1" FontSize="20" HorizontalAlignment="Center" />
-                    <TextBlock Text="M" Grid.Row="1" Grid.Column="2" FontSize="20" HorizontalAlignment="Center" />
-                    <TextBlock Text="C" Grid.Row="1" Grid.Column="3" FontSize="20" HorizontalAlignment="Center" />
-                    <TextBlock Text="T" Grid.Row="1" Grid.Column="4" FontSize="20" HorizontalAlignment="Center" />
-                    <TextBlock Text="P" Grid.Row="1" Grid.Column="5" FontSize="20" HorizontalAlignment="Center" />
-                    <TextBlock Text="M" Grid.Row="1" Grid.Column="6" FontSize="20" HorizontalAlignment="Center" />
-                    <TextBlock Text="C" Grid.Row="1" Grid.Column="7" FontSize="20" HorizontalAlignment="Center" />
-                    <TextBlock Text="T" Grid.Row="1" Grid.Column="8" FontSize="20" HorizontalAlignment="Center" />
-                    <TextBlock x:Name="_1"
-                               Grid.Column="1"
-                               Grid.Row="2"
-                               FontSize="20"
-                               HorizontalAlignment="Center"/>
-                    <TextBlock x:Name="_2"
-                               Grid.Column="2"
-                               Grid.Row="2"
-                               HorizontalAlignment="Center"
-                               FontSize="20" />
-                    <TextBlock x:Name="_3"
-                               Grid.Column="3"
-                               Grid.Row="2"
-                               HorizontalAlignment="Center"
-                               FontSize="20" />
-                    <TextBlock x:Name="_4"
-                               Grid.Column="4"
-                               Grid.Row="2"
-                               HorizontalAlignment="Center"
-                               FontSize="20" />
-                    <TextBlock x:Name="_5"
-                               Grid.Column="5"
-                               Grid.Row="2"
-                               HorizontalAlignment="Center"
-                               FontSize="20" />
-                    <TextBlock x:Name="_6"
-                               Grid.Column="6"
-                               Grid.Row="2"
-                               HorizontalAlignment="Center"
-                               FontSize="20" />
-                    <TextBlock x:Name="_7"
-                               Grid.Column="7"
-                               Grid.Row="2"
-                               HorizontalAlignment="Center"
-                               FontSize="20" />
-                    <TextBlock x:Name="_8"
-                               Grid.Column="8"
-                               Grid.Row="2"
-                               HorizontalAlignment="Center"
-                               FontSize="20" />
-                    <TextBlock x:Name="_9"
-                               Grid.Column="1"
-                               Grid.Row="3"
-                               HorizontalAlignment="Center"
-                               FontSize="20" />
-                    <TextBlock x:Name="_10"
-                               FontSize="20"
-                               Grid.Column="2" Grid.Row="3" HorizontalAlignment="Center"/>
-                    <TextBlock x:Name="_11"
-                               FontSize="20"
-                               Grid.Column="3" Grid.Row="3" HorizontalAlignment="Center"/>
-                    <TextBlock x:Name="_12"
-                               FontSize="20"
-                               Grid.Column="4" Grid.Row="3" HorizontalAlignment="Center"/>
-                    <TextBlock x:Name="_13"
-                               FontSize="20"
-                               Grid.Column="5" Grid.Row="3" HorizontalAlignment="Center"/>
-                    <TextBlock x:Name="_14"
-                               FontSize="20"
-                               Grid.Column="6" Grid.Row="3" HorizontalAlignment="Center"/>
-                    
-                    <TextBlock x:Name="_15"
-                               FontSize="20"
-                               Grid.Column="7" Grid.Row="3" HorizontalAlignment="Center"/>
-                    
-                    <TextBlock x:Name="_16"
-                               FontSize="20"
-                               Grid.Column="8" Grid.Row="3" HorizontalAlignment="Center"/>
-                    
-                    <TextBlock x:Name="_17"
-                               Grid.Column="1"
-                               Grid.Row="4"
-                               TextWrapping="Wrap"
-                               Grid.ColumnSpan="4"
-                               HorizontalAlignment="Center"
-                               VerticalAlignment="Center"
-                               FontSize="30"/>
-                    
-                    <TextBlock x:Name="_18"
-                               Grid.Column="5"
-                               Grid.Row="4"
-                               TextWrapping="Wrap"
-                               Grid.ColumnSpan="4"
-                               VerticalAlignment="Center"
-                               HorizontalAlignment="Center"
-                               FontSize="30"/>
+                    <StackPanel Grid.Row="1" Background="LightCoral">
+                        <TextBlock Text="Variable group"
+                                   
+                                   TextWrapping="Wrap"
+                                   FontSize="15" />
+                    </StackPanel>
+                    <StackPanel Grid.Row="2"
+                            Background="LightPink">
+                        <TextBlock Text="Variables of group" TextWrapping="Wrap" FontSize="15"/>
+                    </StackPanel>
+                    <StackPanel Grid.Row="3"
+                            Background="LightSalmon">
+                        <TextBlock Text="Amount of variables"
+                                   TextWrapping="Wrap"
+                                   FontSize="15" />
+                    </StackPanel>
+                    <StackPanel Grid.Row="4"
+                            Background="LightSeaGreen">
+                        <TextBlock Text="Chepin Metric"                                   
+                                   TextWrapping="Wrap"
+                                   FontSize="15" />
+                    </StackPanel>
+                    <StackPanel Background="LightGray"
+                            Grid.Row="1"
+                            Grid.Column="1">
+                        <TextBlock Text="P"
+                                   FontSize="20"
+                                   HorizontalAlignment="Center" />
+                    </StackPanel>
+                    <StackPanel Grid.Row="1"
+                                Grid.Column="2"
+                                Background="LightSkyBlue">
+                        <TextBlock Text="C"                                   
+                                   FontSize="20"
+                                   HorizontalAlignment="Center" />
+                    </StackPanel>
+                    <StackPanel Grid.Row="1"
+                                Grid.Column="3"
+                                Background="LightSlateGray">
+                        <TextBlock Text="M"                                   
+                                   FontSize="20"
+                                   HorizontalAlignment="Center" />
+                    </StackPanel>
+                    <StackPanel Grid.Row="1"
+                                Grid.Column="4"
+                                Background="LightYellow">
+                        <TextBlock Text="T"                                   
+                                   FontSize="20"
+                                   HorizontalAlignment="Center" />
+                    </StackPanel>
+                    <StackPanel Grid.Row="1"
+                                Grid.Column="5"
+                                Background="LightSteelBlue">
+                        <TextBlock Text="P"                                   
+                                   FontSize="20"
+                                   HorizontalAlignment="Center" />
+                    </StackPanel>
+                    <StackPanel Grid.Row="1"
+                                Grid.Column="6"
+                                Background="IndianRed">
+                        <TextBlock Text="C"                                   
+                                   FontSize="20"
+                                   HorizontalAlignment="Center" />
+                    </StackPanel>
+                    <StackPanel Grid.Row="1"
+                                Grid.Column="7"
+                                Background="Bisque">
+                        <TextBlock Text="M"                                   
+                                   FontSize="20"
+                                   HorizontalAlignment="Center" />
+                    </StackPanel>
+                    <StackPanel Grid.Row="1"
+                                Grid.Column="8"
+                                Background="HotPink">
+                        <TextBlock Text="T"                                   
+                                   FontSize="20"
+                                   HorizontalAlignment="Center" />
+                    </StackPanel>
+                    <StackPanel Grid.Column="1"
+                                Grid.Row="2"
+                                Background="Chartreuse">
+                        <TextBlock x:Name="_1"                                   
+                                   FontSize="20"
+                                   HorizontalAlignment="Center"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="2"
+                                Grid.Row="2"
+                                Background="Cyan">
+                        <TextBlock x:Name="_2"                                   
+                                   HorizontalAlignment="Center"
+                                   FontSize="20" />
+                    </StackPanel>
+                    <StackPanel Grid.Column="3"
+                                Grid.Row="2"
+                                Background="MediumVioletRed">
+                        <TextBlock x:Name="_3"                                   
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   FontSize="20" />
+                    </StackPanel>
+                    <StackPanel Grid.Column="4"
+                                Grid.Row="2"
+                                Background="RoyalBlue">
+                        <TextBlock x:Name="_4"                                   
+                                   HorizontalAlignment="Center"
+                                   FontSize="20" />
+                    </StackPanel>
+                    <StackPanel Grid.Column="5"
+                                Grid.Row="2"
+                                Background="Azure">
+                        <TextBlock x:Name="_5"                                   
+                                   HorizontalAlignment="Center"
+                                   FontSize="20" />
+                    </StackPanel>
+                    <StackPanel Grid.Column="6"
+                                Grid.Row="2"
+                                Background="MediumTurquoise">
+                        <TextBlock x:Name="_6"                                   
+                                   HorizontalAlignment="Center"
+                                   FontSize="20" />
+                    </StackPanel>
+                    <StackPanel Grid.Column="7"
+                                Grid.Row="2"
+                                Background="Ivory">
+                        <TextBlock x:Name="_7"                                   
+                                   HorizontalAlignment="Center"
+                                   FontSize="20" />
+                        
+                    </StackPanel>
+                    <StackPanel Grid.Column="8"
+                                Grid.Row="2"
+                                Background="OrangeRed">
+                        <TextBlock x:Name="_8"                                   
+                                   HorizontalAlignment="Center"
+                                   FontSize="20" />
+                    </StackPanel>
+                    <StackPanel Grid.Column="1"
+                                Grid.Row="3"
+                                Background="LavenderBlush">
+                        <TextBlock x:Name="_9"                                   
+                                   HorizontalAlignment="Center"
+                                   FontSize="35" />
+                    </StackPanel>
+                    <StackPanel Grid.Column="2"
+                                Grid.Row="3"
+                                Background="Tomato">
+                        <TextBlock x:Name="_10"
+                                   FontSize="35"                                   
+                                   HorizontalAlignment="Center" />
+                    </StackPanel>
+                    <StackPanel Grid.Column="3"
+                                Grid.Row="3"
+                                Background="Moccasin">
+                        <TextBlock x:Name="_11"
+                                   FontSize="35"                                   
+                                   HorizontalAlignment="Center" />
+                    </StackPanel>
+                    <StackPanel Grid.Column="4"
+                                Grid.Row="3"
+                                Background="Lime">
+                        <TextBlock x:Name="_12"
+                                   FontSize="35"                                   
+                                   HorizontalAlignment="Center" />  
+                    </StackPanel>
+                    <StackPanel Grid.Column="5"
+                                Grid.Row="3"
+                                Background="Gold">
+                        <TextBlock x:Name="_13"
+                                   FontSize="35"                                   
+                                   HorizontalAlignment="Center" />
+                    </StackPanel>
+                    <StackPanel Grid.Column="6"
+                                Grid.Row="3"
+                                Background="Fuchsia">
+                        <TextBlock x:Name="_14"
+                                   FontSize="35"                                   
+                                   HorizontalAlignment="Center" />
+                    </StackPanel>
+                    <StackPanel Grid.Column="7"
+                                Grid.Row="3"
+                                Background="Tan">
+                        <TextBlock x:Name="_15"
+                                   FontSize="35"                                   
+                                   HorizontalAlignment="Center" />
+                    </StackPanel>
+                    <StackPanel Grid.Column="8"
+                                Grid.Row="3"
+                                Background="Chocolate">
+                        <TextBlock x:Name="_16"
+                                   FontSize="35"                                   
+                                   HorizontalAlignment="Center" />
+                    </StackPanel>
+                    <StackPanel Grid.Column="1"
+                                Grid.Row="4"
+                                Grid.ColumnSpan="4"
+                                Background="LemonChiffon">
+                        <TextBlock x:Name="_17"                                   
+                                   TextWrapping="Wrap"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   FontSize="35" />
+                    </StackPanel>
+                    <StackPanel Grid.Column="5"
+                                Grid.Row="4"
+                                Grid.ColumnSpan="4"
+                                Background="Silver">
+                        <TextBlock x:Name="_18"                                   
+                                   TextWrapping="Wrap"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Center"
+                                   FontSize="35" />
+                    </StackPanel>
                 </Grid>
             </TabItem>
         </TabControl>
