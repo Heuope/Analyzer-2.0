@@ -310,7 +310,8 @@ namespace Minecraft
                     P.Add(variable);
                     //continue;
                 }
-                T.Add(variable);
+                if (!appropriation)
+                    T.Add(variable);
             }
             functionGroups.Add("P", P);
             functionGroups.Add("C", C);
@@ -384,7 +385,7 @@ namespace Minecraft
                     P.Add(variable);
                     //continue;
                 }
-                if (introduced)
+                if (introduced & !appropriation)
                     T.Add(variable);
             }
             functionGroups.Add("P", P);
